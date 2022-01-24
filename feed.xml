@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Identity Technology (again)</title>
+    <link href="https://github.com/identity-jason/identech/feed.xml" rel="self" />
+    <link href="https://github.com/identity-jason/identech" />
+    <updated>2022-01-09T11:32:22+00:00</updated>
+    <author>
+        <name>identity_jason</name>
+    </author>
+    <id>https://github.com/identity-jason/identech</id>
+
+    <entry>
+        <title>The Undocumented Sync Engine</title>
+        <author>
+            <name>identity_jason</name>
+        </author>
+        <link href="https://github.com/identity-jason/identech/the-undocumented-sync-engine/"/>
+        <id>https://github.com/identity-jason/identech/the-undocumented-sync-engine/</id>
+
+        <updated>2022-01-09T11:32:22+00:00</updated>
+            <summary>
+                <![CDATA[
+                    A colleague forwarded this onto me and I think it's worth sharing - since leaving Microsoft, Andreas Kjellman has been&hellip;
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                <p>A colleague forwarded this onto me and I think it's worth sharing - since leaving Microsoft,  Andreas Kjellman has been writing up some of the 'undocumented' aspects of the ECMA2 and it's absolute gold.</p>
+<p>The site is here:</p>
+<p><a href="http://www.theundocumentedsyncengine.com/content/home.html">http://www.theundocumentedsyncengine.com/content/home.html</a></p>
+<p>And let's hope that there's more information like this still to come!</p>
+
+            ]]>
+        </content>
+    </entry>
+    <entry>
+        <title>This implementation is not part of the Windows Platform FIPS validated cryptographic algorithms</title>
+        <author>
+            <name>identity_jason</name>
+        </author>
+        <link href="https://github.com/identity-jason/identech/this-implementation-is-not-part-of-the-windows-platform-fips-validated-cryptographic-algorithms/"/>
+        <id>https://github.com/identity-jason/identech/this-implementation-is-not-part-of-the-windows-platform-fips-validated-cryptographic-algorithms/</id>
+
+        <updated>2022-01-09T11:32:22+00:00</updated>
+            <summary>
+                <![CDATA[
+                    Or when FIM Filters go bad... I'm currently taking a new project into production for the first time, and was&hellip;
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                <p>Or when FIM Filters go bad...</p>
+<p>I'm currently taking a new project into production for the first time, and was a bit confused when the Sets being uploaded started failing with the FIPS error above - especially as I don't quite understand how <a href="https://en.wikipedia.org/wiki/Federal_Information_Processing_Standards" target="_blank">FIPS </a> was being invoked for anything to do with this solution.</p>
+<p>Fortunately this turns out to be the message thrown by MIM when a set that doesn't meet the allowed filter criteria is uploaded - in development I'd disabled the MPRs that enforce the filter checks and it looks like when I've been performing the configuration upload that these sets were encountered before the updated MPR was.</p>
+<p>Panic over as at least it's possible to pre-emptively update (disable) the 'General workflow: filter attribute validation for administrator' and 'non-administrator' MPR and a re-import went in smoothly.</p>
+
+            ]]>
+        </content>
+    </entry>
+    <entry>
+        <title>Just in time&amp;ndash;debugging</title>
+        <author>
+            <name>identity_jason</name>
+        </author>
+        <link href="https://github.com/identity-jason/identech/just-in-timeandndashdebugging/"/>
+        <id>https://github.com/identity-jason/identech/just-in-timeandndashdebugging/</id>
+
+        <updated>2022-01-09T11:32:21+00:00</updated>
+            <summary>
+                <![CDATA[
+                    I’ve recently rebuilt a development environment – replacing my older Windows 2008 FIM R2 rig with a Windows 2012 MIM&hellip;
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                <p>I’ve recently rebuilt a development environment – replacing my older Windows 2008 FIM R2 rig with a Windows 2012 MIM and hit an odd problem when trying to trigger the just in time debugger from within my code.</p>
+<p>Normally to debug one of my tools, I just set a label at run time and the debugger is automatically triggered using System.Diagnostics.Debugger.Launch(); – however in the new environment the debugger never appears and in the event log I see an error message warning me that “Just-In-Time debugging this exception failed with the following error: The operation attempted is not supported.”</p>
+<p><a href="http://identitytechnology.net/wp-content/uploads/2016/03/image-2.png"><img loading="lazy" title="image" style="border-top: 0px; border-right: 0px; background-image: none; border-bottom: 0px; padding-top: 0px; padding-left: 0px; border-left: 0px; display: inline; padding-right: 0px" border="0" alt="image" src="https://github.com/identity-jason/identech/media/posts/43/image_thumb-2.png" sizes="(max-width: 48em) 100vw, 768px" srcset="https://github.com/identity-jason/identech/media/posts/43/responsive/image_thumb-2-xs.png 300w ,https://github.com/identity-jason/identech/media/posts/43/responsive/image_thumb-2-sm.png 480w ,https://github.com/identity-jason/identech/media/posts/43/responsive/image_thumb-2-md.png 768w"  width="600" height="419"></a></p>
+<p>After doing some digging about, it appears that this is actually a security feature introduced after Windows 2008 – fortunately though, it can be turned off by updating the registry and I’ve found that setting HKEY_CLASSES_ROOT\AppID\{E62A7A31-6025-408E-87F6-81AEB0DC9347}\AppIDFlags to a value of 0x08 seems to do the trick and debugging is restored.</p>
+<p><a href="http://identitytechnology.net/wp-content/uploads/2016/03/image-3.png"><img loading="lazy" title="image" style="border-top: 0px; border-right: 0px; background-image: none; border-bottom: 0px; padding-top: 0px; padding-left: 0px; border-left: 0px; display: inline; padding-right: 0px" border="0" alt="image" src="https://github.com/identity-jason/identech/media/posts/43/image_thumb-3.png" sizes="(max-width: 48em) 100vw, 768px" srcset="https://github.com/identity-jason/identech/media/posts/43/responsive/image_thumb-3-xs.png 300w ,https://github.com/identity-jason/identech/media/posts/43/responsive/image_thumb-3-sm.png 480w ,https://github.com/identity-jason/identech/media/posts/43/responsive/image_thumb-3-md.png 768w"  width="600" height="163"></a></p>
+<p><a title="https://connect.microsoft.com/VisualStudio/feedback/details/770786/just-in-time-debugging-operation-attempted-is-not-supported" href="https://connect.microsoft.com/VisualStudio/feedback/details/770786/just-in-time-debugging-operation-attempted-is-not-supported">https://connect.microsoft.com/VisualStudio/feedback/details/770786/just-in-time-debugging-operation-attempted-is-not-supported</a></p>
+<p>more background to why the feature was introduced here: <a title="http://stackoverflow.com/questions/11940378/vsjitdebugger-operation-attempted-is-not-supported-on-windows-8-windows-server" href="http://stackoverflow.com/questions/11940378/vsjitdebugger-operation-attempted-is-not-supported-on-windows-8-windows-server">http://stackoverflow.com/questions/11940378/vsjitdebugger-operation-attempted-is-not-supported-on-windows-8-windows-server</a></p>
+
+
+
+            ]]>
+        </content>
+    </entry>
+    <entry>
+        <title>Unexpected &amp;lsquo;Unable to process your request&amp;rsquo; error</title>
+        <author>
+            <name>identity_jason</name>
+        </author>
+        <link href="https://github.com/identity-jason/identech/unexpected-andlsquounable-to-process-your-requestandrsquo-error/"/>
+        <id>https://github.com/identity-jason/identech/unexpected-andlsquounable-to-process-your-requestandrsquo-error/</id>
+
+        <updated>2022-01-09T11:32:21+00:00</updated>
+            <summary>
+                <![CDATA[
+                    I have an established MIM server that I’m currently developing on that started to throw ‘Unable to process your request’&hellip;
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                <p>I have an established MIM server that I’m currently developing on that started to throw ‘Unable to process your request’ errors whenever I attempted to move away from the initial landing tab of any RCDC – including the “System” ones such as those for MPR and Sets.</p>
+<p>Looking into the event log on the Portal server it looked like there was a clear issue as:</p>
+<p><a href="http://identitytechnology.net/wp-content/uploads/2016/03/image.png"><img loading="lazy" title="image" style="border-top: 0px; border-right: 0px; background-image: none; border-bottom: 0px; padding-top: 0px; padding-left: 0px; border-left: 0px; display: inline; padding-right: 0px" border="0" alt="image" src="https://github.com/identity-jason/identech/media/posts/42/image_thumb.png" sizes="(max-width: 48em) 100vw, 768px" srcset="https://github.com/identity-jason/identech/media/posts/42/responsive/image_thumb-xs.png 300w ,https://github.com/identity-jason/identech/media/posts/42/responsive/image_thumb-sm.png 480w ,https://github.com/identity-jason/identech/media/posts/42/responsive/image_thumb-md.png 768w"  width="626" height="69"></a></p>
+<p><a href="http://identitytechnology.net/wp-content/uploads/2016/03/image-1.png"><img loading="lazy" title="image" style="border-top: 0px; border-right: 0px; background-image: none; border-bottom: 0px; padding-top: 0px; padding-left: 0px; border-left: 0px; display: inline; padding-right: 0px" border="0" alt="image" src="https://github.com/identity-jason/identech/media/posts/42/image_thumb-1.png" sizes="(max-width: 48em) 100vw, 768px" srcset="https://github.com/identity-jason/identech/media/posts/42/responsive/image_thumb-1-xs.png 300w ,https://github.com/identity-jason/identech/media/posts/42/responsive/image_thumb-1-sm.png 480w ,https://github.com/identity-jason/identech/media/posts/42/responsive/image_thumb-1-md.png 768w"  width="395" height="224"></a></p>
+<p>It turns out that I’d managed to fill the transaction log for the MIM Service database and this was causing the whole service to misbehave – working through the suggestions here: <a title="https://msdn.microsoft.com/en-ie/library/ms175495.aspx" href="https://msdn.microsoft.com/en-ie/library/ms175495.aspx">https://msdn.microsoft.com/en-ie/library/ms175495.aspx</a></p>
+<p>I was able to reduce the size of the transaction log and free space allowing MIM to breath – or at least start to behave itself again and normal MIM operation resuming once SQL had enough space to work again.</p>
+
+
+
+            ]]>
+        </content>
+    </entry>
+    <entry>
+        <title>MIMWAL Demo</title>
+        <author>
+            <name>identity_jason</name>
+        </author>
+        <link href="https://github.com/identity-jason/identech/mimwal-demo/"/>
+        <id>https://github.com/identity-jason/identech/mimwal-demo/</id>
+
+        <updated>2022-01-09T11:32:21+00:00</updated>
+            <summary>
+                <![CDATA[
+                    Update - A copy of this session is available on YouTube - https://www.youtube.com/watch?v=-TaTvfbgBJQ The FIM Team have organized a briefing&hellip;
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                <p>Update - A copy of this session is available on YouTube - <a href="https://www.youtube.com/watch?v=-TaTvfbgBJQ" target="_blank">https://www.youtube.com/watch?v=-TaTvfbgBJQ</a></p>
+<p>The FIM Team have organized a briefing and Demo about MIMWAL for Februarys session – should make for an interesting demo and discussion.</p>
+<p>From - <a title="https://www.thefimteam.com/fim-team-user-group/" href="https://www.thefimteam.com/fim-team-user-group/">https://www.thefimteam.com/fim-team-user-group/</a></p>
+<p>Date:<br>10th February 2016, 20:00 UTC<br><a href="http://www.timeanddate.com/worldclock/fixedtime.html?msg=MIM+Team+User+Group+February+2016&amp;iso=20160211T07&amp;p1=57&amp;ah=1">See when this is in your timezone</a> 
+<p>Presenter:<br>Jef Kazimer (Microsoft) 
+<p>Topic:<br>Demonstration of the MIM/FIM Workflow Activity Library (WAL) which has now been made availbel, by Microsoft, as open source project on GitHub.<br>The MIMWAL is a powerful solution accelerator for MIM / FIM that provides foundational activities which can be combined to create complex workflows to implement business processes within a MIM / FIM solution simply by configuration instead of coding. Microsoft Consoluting Services have been using this library for years and now the latest version has been made available for anyone to use.</p>
+
+
+
+            ]]>
+        </content>
+    </entry>
+    <entry>
+        <title>Microsoft WAL Library goes public</title>
+        <author>
+            <name>identity_jason</name>
+        </author>
+        <link href="https://github.com/identity-jason/identech/microsoft-wal-library-goes-public/"/>
+        <id>https://github.com/identity-jason/identech/microsoft-wal-library-goes-public/</id>
+
+        <updated>2022-01-09T11:32:21+00:00</updated>
+            <summary>
+                <![CDATA[
+                    Microsoft have released their FIMWAL / MIMWAL “Workflow Activity Library” for building advanced workflows within FIM&nbsp; / FIM. Code and&hellip;
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                <p>Microsoft have released their FIMWAL / MIMWAL “Workflow Activity Library” for building advanced workflows within FIM&nbsp; / FIM.</p>
+<p>Code and more details can be located here:</p>
+<p><a href="http://microsoft.github.io/MIMWAL/">http://microsoft.github.io/MIMWAL/</a></p>
+<p>If you’re at all interested in creating advanced workflows however it’s going to be worth a look.</p>
+
+
+
+            ]]>
+        </content>
+    </entry>
+    <entry>
+        <title>Sync run profile fails for some connectors</title>
+        <author>
+            <name>identity_jason</name>
+        </author>
+        <link href="https://github.com/identity-jason/identech/sync-run-profile-fails-for-some-connectors/"/>
+        <id>https://github.com/identity-jason/identech/sync-run-profile-fails-for-some-connectors/</id>
+
+        <updated>2022-01-09T11:32:21+00:00</updated>
+            <summary>
+                <![CDATA[
+                    We’re in the process of building a demo environment for a presentation when two of our connectors stopped synchronizing with&hellip;
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                <p>We’re in the process of building a demo environment for a presentation when two of our connectors stopped synchronizing with a credential error.</p>
+<p>The error thrown is “Unable to run the Management Agent” / “The Management Agent failed to validate against the application store with the specified credentials” which throws a Bail out into the event log with error code 0x80230709.</p>
+<p>What is most odd is this was happening on two of the Management Agents on the solution – one which isn’t actually in use and the FIM MA (slightly more important) but all the other management agents will import / export / sync as usual.</p>
+<p>After a great deal of worry, we’ve spotted that the account used to connect out to these two connectors has expired and unlocking it resolves the problem.</p>
+<p>I’m not clear why FIM would be checking the external credentials for a straight (and basic) synchronization cycle as I’d have expected that to operate purely within the boundaries of the FIM Synchronization DB which these accounts don’t event grant access to.</p>
+
+
+
+            ]]>
+        </content>
+    </entry>
+    <entry>
+        <title>FIM EventLog records errors on searches</title>
+        <author>
+            <name>identity_jason</name>
+        </author>
+        <link href="https://github.com/identity-jason/identech/fim-eventlog-records-errors-on-searches/"/>
+        <id>https://github.com/identity-jason/identech/fim-eventlog-records-errors-on-searches/</id>
+
+        <updated>2022-01-09T11:32:21+00:00</updated>
+            <summary>
+                <![CDATA[
+                    I’m currently debugging some custom workflow activities and updating the logging code so it produces more useful information (apparently my&hellip;
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                <p>I’m currently debugging some custom workflow activities and updating the logging code so it produces more useful information (apparently my ‘development’ error codes aren’t human readable enough!) and noticed that I was getting lots of ‘KeyNotFound’ exceptions in the event log.</p>
+<p>Microsoft.ResourceManagement.WebServices.Exceptions.UnwillingToPerformException: Other ---&gt; System.Collections.Generic.KeyNotFoundException: The given key was not present in the dictionary.</p>
+<p>After much digging through my code I spotted that this was actually being generated whenever I read from FIM in the Portal and while it was a relief to know that my workflow code was off the hook I didn’t really want to leave this in place and cluttering up the eventlog.</p>
+<p>It looks like this was introduced during one of the hotfix releases (4.1.3496 is mentioned in the article I’ve linked to below) when additional Portal configuration was introduced to allow the Advanced Search option to be turned off – this means that my local FIM installation was actually attempting to locate an attribute on the Portal Configuration that I didn’t have in my schema which was the cause of the KeyNotFound exceptions I was finding.</p>
+<p>The steps to fix is are fairly simple as follows (Steps taken from the referenced documents - not my own work - see below for links)</p>
+<p>To enable the configuration and remove the <strong>Advanced Search</strong> link, follow these steps: 
+<ol> 
+<li>In <strong>Administration</strong>, click <strong>Schema Management</strong>, and then click <strong>All Attributes</strong>. </li>
+<li>Create a new Boolean attribute that is named "HideAdvancedSearchLink." </li>
+<li>In <strong>All Bindings</strong>, create a new binding for the <strong>HideAdvancedSearchLink</strong> attribute to the <strong>Portal Configuration</strong> resource, and then click <strong>Finish</strong> to save the binding. </li>
+<li>Create a new Management Policy Rule (MPR) to allow for changes to the new binding in the portal configuration. To do this, use the following configuration for the new MPR:<strong>Display Name:</strong> Administrators can modify the <strong>HideAdvancedSearchLink</strong> attribute in the Portal Configuration resource<br><strong>Type:</strong> Request<br><strong>Disabled:</strong> False<br><strong>Specific Set of Requestors:</strong> All Administrators<br><strong>Operation:</strong> Modify a single-valued attribute<br><strong>Permissions:</strong> Grants permission<br><strong>Target Resource Definition Before Request:</strong> All Basic Configuration Objects<br><strong>Target Resource Definition After Request:</strong> All Basic Configuration Objects<br><strong>Resource Attributes:</strong> Select specific attributes: <strong>HideAdvancedSearchLink</strong></li>
+<li>Reset Internet Information Services (IIS), and then restart the FIM service. </li>
+<li>In <strong>Administration</strong>, click <strong>Portal Configuration</strong>, and then click <strong>Extended Attributes</strong>. You should see the<strong>HideAdvancedSearchLink</strong> attribute together with the other extended attributes. </li>
+<li>Click to select the <strong>HideAdvancedSearchLink</strong> check box, and then click <strong>Submit</strong> to enable the hiding of the <strong>Advanced Search</strong> link. </li>
+<li>Verify that the <strong>Advanced Search</strong> link is not available in the list views. For example, check the following list views: </li>
+<li>My DGs  
+<li>My DG Memberships  
+<li>Management Policy Rules</li>
+</ol>
+<p>Once I had this implemented and FIM restarted the errors were removed and I was left with the exceptions of my own making again – yay I think!</p>
+<p>Links for the above are to:</p>
+<p>Blog Post - <a title="http://www.networksteve.com/windows/topic.php/Error_raised_in_the_event_log_when_browsing_the_portal/?TopicId=61333&amp;Posts=3" href="http://www.networksteve.com/windows/topic.php/Error_raised_in_the_event_log_when_browsing_the_portal/?TopicId=61333&amp;Posts=3">http://www.networksteve.com/windows/topic.php/Error_raised_in_the_event_log_when_browsing_the_portal/?TopicId=61333&amp;Posts=3</a></p>
+<p>KB Article -<a title="https://support.microsoft.com/en-us/kb/2906832/en-us" href="https://support.microsoft.com/en-us/kb/2906832/en-us">https://support.microsoft.com/en-us/kb/2906832/en-us</a></p>
+
+
+
+            ]]>
+        </content>
+    </entry>
+    <entry>
+        <title>Daylight Savings</title>
+        <author>
+            <name>identity_jason</name>
+        </author>
+        <link href="https://github.com/identity-jason/identech/daylight-savings/"/>
+        <id>https://github.com/identity-jason/identech/daylight-savings/</id>
+
+        <updated>2022-01-09T11:32:21+00:00</updated>
+            <summary>
+                <![CDATA[
+                    Sometimes FIM strikes me as being way to clever for its own (and usually my) good – and I’ve been&hellip;
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                <p>Sometimes FIM strikes me as being way to clever for its own (and usually my) good – and I’ve been looking into a problem for a client that ticks this box big time.</p>
+<p>They have a number of email notifications that they need to generate that instruct various parties within the organization about people joining, moving and leaving so that the processes that they can’t or don’t want to automate can be initiated based on the data held by FIM – in this scenario, a leavers email is sent to HR letting them know when a contractor has reached their leaving date.</p>
+<p>This works fairly well for six months out of every year – during the daylight savings months, the email is issued the day before its supposed to go out, and the HR department being highly efficient are carrying out the required action when they see the email leading to all sorts of downstream mayhem trying to clean up after the event.</p>
+<p>Naturally, focus fell on a custom workflow that is used to generate these emails and after spending an amount of time pulling apart the code it occurred to me that nothing in the workflow could actually be causing this and it was the user account transitioning into the temporal set that was executing a day early (obvious in hindsight <figure class="wlEmoticon wlEmoticon-sadsmile"><img loading="lazy"  style="border-top-style: none; border-bottom-style: none; border-right-style: none; border-left-style: none" alt="Sad smile" src="https://github.com/identity-jason/identech/media/posts/37/wlEmoticon-sadsmile.png" sizes="(max-width: 48em) 100vw, 768px" srcset="https://github.com/identity-jason/identech/media/posts/37/responsive/wlEmoticon-sadsmile-xs.png 300w ,https://github.com/identity-jason/identech/media/posts/37/responsive/wlEmoticon-sadsmile-sm.png 480w ,https://github.com/identity-jason/identech/media/posts/37/responsive/wlEmoticon-sadsmile-md.png 768w" ></figure> ) – seeing as I had visual studio hooked up to the workflow, I moved a few more users about and it turned out that even though their leaving date was set correctly – e..g 03/06/2015 – FIM was transposing this in the background and storing it as 02/06/2015 23:00.</p>
+<p>What it appears is that when FIM is presented with a date, it’s transposing it into UTC for internal storage and as during June GMT (the configured time zone for the solution) is +1 hour compared to UTC, it’s removing the hour and bringing the user’s leaving date forward into the previous day – allowing it to trigger the removal notification effectively 24 hours early.</p>
+<p>Fortunately as FIM is using its configured time zone to work this out, it’s a fairly simple case (in this instance!) to create a new UTC TimeZone object and then configure FIM to use this instead of the previous GMT one although this probably isn’t going to be a fix in all instances!</p>
+
+
+
+            ]]>
+        </content>
+    </entry>
+    <entry>
+        <title>HomepageConfiguration&amp;ndash;IsConfigurationType</title>
+        <author>
+            <name>identity_jason</name>
+        </author>
+        <link href="https://github.com/identity-jason/identech/homepageconfigurationandndashisconfigurationtype/"/>
+        <id>https://github.com/identity-jason/identech/homepageconfigurationandndashisconfigurationtype/</id>
+
+        <updated>2022-01-09T11:32:21+00:00</updated>
+            <summary>
+                <![CDATA[
+                    I’m currently working on some tools to upload portal elements and have been struggling with uploaded Homepage Configuration items –&hellip;
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                <p>I’m currently working on some tools to upload portal elements and have been struggling with uploaded Homepage Configuration items – they upload, but they don’t display.</p>
+<p>Turns out that the IsConfigurationType flag needs to be set otherwise the Homepage item doesn’t display – simple when you know… (as usual)</p>
+<p>
+
+Note - IsConfigurationType doesn't appear on the standard RCDC, you need to go into advanced view to be able to see / update it (doesn't really help if you're troubleshooting and can't see an obvious difference between one Homepage item that displays and another that doesn't!)</p>
+<p>Note - looks like there's similar behaviour on Navigation Bar Items as well - at least it's consistent!</p>
+
+
+            ]]>
+        </content>
+    </entry>
+</feed>
